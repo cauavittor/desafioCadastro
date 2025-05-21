@@ -1,21 +1,16 @@
 package model;
 
 public class EnderecoPet {
-    private Integer numeroDaCasa;
+    private String numeroDaCasa;
     private String cidadeEncontrada;
     private String ruaEncontrada;
 
-    public EnderecoPet(Integer numeroDaCasa, String cidadeEncontrada, String ruaEncontrada) {
-        this.numeroDaCasa = numeroDaCasa;
-        this.cidadeEncontrada = cidadeEncontrada;
-        this.ruaEncontrada = ruaEncontrada;
-    }
 
-    public Integer getNumeroDaCasa() {
+    public String getNumeroDaCasa() {
         return numeroDaCasa;
     }
 
-    public void setNumeroDaCasa(Integer numeroDaCasa) {
+    public void setNumeroDaCasa(String numeroDaCasa) {
         this.numeroDaCasa = numeroDaCasa;
     }
 

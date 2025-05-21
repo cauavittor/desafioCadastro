@@ -1,10 +1,13 @@
 package menu;
 
+import services.CadastrarPet;
+
 import java.util.Scanner;
 
 public class Menu {
     public void opcoesMenu() throws IllegalArgumentException {
         Scanner scanner = new Scanner (System.in);
+        CadastrarPet cadastrarPet = new CadastrarPet();
         System.out.println("\n1 - Cadastrar um novo pet");
         System.out.println("2 - Alterar os dados do pet cadastrado");
         System.out.println("3 - Deletar um pet cadastrado");
@@ -18,6 +21,7 @@ public class Menu {
             switch (opcao) {
                 case 1:
                     System.out.println("opcao 1 - cadastrar pet");
+                    cadastrarPet.CadastroDePets();
                     break;
                 case 2:
                     System.out.println("opcao 2");
@@ -44,6 +48,8 @@ public class Menu {
 
         }
     }
+
+
 
 
 }

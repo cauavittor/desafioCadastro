@@ -1,7 +1,7 @@
 package model;
 
 public enum PetGender {
-    MACHO("macho"),
+    MACHO("Macho"),
     FEMEA("Femea");
     private String descricao;
 

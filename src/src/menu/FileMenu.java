@@ -1,12 +1,14 @@
 package menu;
 
+import model.Pet;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class FileMenu {
-
+    Pet pet = new Pet();
     public void escreverArquivo() {
         Path paths = Paths.get("C:\\Users\\CAUA\\IdeaProjects\\desafioCadastro\\src\\src\\data\\formulario.txt");
         try (FileWriter fw = new FileWriter(String.valueOf(paths))) {
@@ -20,15 +22,30 @@ public class FileMenu {
     }
 
     public void lerArquivo(){
+        Scanner scanner = new Scanner (System.in);
         Path path = Paths.get("C:\\Users\\CAUA\\IdeaProjects\\desafioCadastro\\src\\src\\data\\formulario.txt");
         try(FileReader fr = new FileReader(path.toString())){
             BufferedReader bfr = new BufferedReader(fr);
-            bfr.readLine();
+            String linha;
+            for (int i = 1; i < 7; i++) {
+
+                String string = String.valueOf(i);
+                while ((linha = bfr.readLine()) != string) {
+                    System.out.println(linha);
+                    scanner.next();
+                    break;
+
+
+                }
+            }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+
+
 
 }

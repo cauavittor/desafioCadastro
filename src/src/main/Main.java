@@ -15,5 +15,6 @@ public class Main {
         fileMenu.escreverArquivo();
         fileMenu.lerArquivo();
 
+
     }
 }

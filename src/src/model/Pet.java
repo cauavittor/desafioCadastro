@@ -41,11 +41,11 @@ public class Pet {
     }
 
     public String setNome(String nome) {
-        if (!nome.matches("^[a-zA-ZÂ-ÿ]$")) {
+        if (nome.matches("^[A-Za-zÀ-ÿ]")) {
             throw new IllegalArgumentException("Nome inválido, tente novamente.");
         }
         if (nome == null) {
-            this.nome = NAO_INFORMADO;
+            this.nome = "NAO_INFORMADO";
             return nome;
         }
         this.nome = nome.trim();
@@ -72,14 +72,14 @@ public class Pet {
         if (idade == null) {
             this.idade = NAO_INFORMADO;
         }
-        if (idade.matches("^[a-zA-ZÃ-ÿ]")){
+        if (idade.matches("^[a-zA-ZÃ-ÿ]")) {
             throw new IllegalArgumentException("A idade do pet so pode ser definida por números.");
         }
         return idade;
     }
 
     public void setEnderecoPet(EnderecoPet enderecoPet) {
-        if (enderecoPet.getNumeroDaCasa() == null){
+        if (enderecoPet.getNumeroDaCasa() == null) {
             enderecoPet.setNumeroDaCasa(NAO_INFORMADO);
         }
         this.enderecoPet = enderecoPet;
@@ -87,18 +87,20 @@ public class Pet {
 
     public void setTipoPet(TipoPet tipoPet) {
         this.tipoPet = tipoPet;
-    }
 
-    public void setPetGender(PetGender petGender) {
-        this.petGender = petGender;
-    }
 
-    public void setPetRace(String petRace) {
-        if (petRace == null){
-            this.petRace = NAO_INFORMADO;
-        } if (!petRace.matches("^[a-zA-ZÃ-ÿ]")){
-            throw new IllegalArgumentException("A raça do pet nao pode conter numeros, espaços ou caracteres especiais.");
+        public void setPetGender (PetGender petGender){
+            this.petGender = petGender;
         }
-        this.petRace = petRace;
+
+        public void setPetRace (String petRace){
+            if (petRace == null) {
+                this.petRace = NAO_INFORMADO;
+            }
+            if (!petRace.matches("^[a-zA-ZÃ-ÿ]")) {
+                throw new IllegalArgumentException("A raça do pet nao pode conter numeros, espaços ou caracteres especiais.");
+            }
+            this.petRace = petRace;
+        }
     }
-}
+

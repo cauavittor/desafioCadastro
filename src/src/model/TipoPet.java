@@ -32,4 +32,8 @@ public enum TipoPet {
 
     abstract String numeroEscolhido(Integer number);
 
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.IllegalFormatCodePointException;
+
 public class EnderecoPet {
     private String numeroDaCasa;
     private String cidadeEncontrada;
@@ -11,6 +13,7 @@ public class EnderecoPet {
     }
 
     public void setNumeroDaCasa(String numeroDaCasa) {
+
         this.numeroDaCasa = numeroDaCasa;
     }
 
@@ -29,4 +32,5 @@ public class EnderecoPet {
     public void setRuaEncontrada(String ruaEncontrada) {
         this.ruaEncontrada = ruaEncontrada;
     }
+
 }

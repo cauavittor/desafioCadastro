@@ -1,6 +1,15 @@
 package model;
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Pet {
     private String nome;
     private String pesoAproximado;
@@ -9,7 +18,7 @@ public class Pet {
     private EnderecoPet enderecoPet;
     private TipoPet tipoPet;
     private PetGender petGender;
-    private final String NAO_INFORMADO = "NAO_INFORMADO";
+    private static final String NAO_INFORMADO = "Não informado";
 
 
     public String getNome() {
@@ -41,41 +50,47 @@ public class Pet {
     }
 
     public String setNome(String nome) {
-        if (nome.matches("^[A-Za-zÀ-ÿ]")) {
+        if (nome == null || nome.isEmpty() || nome.contains(" ")) {
+            this.nome = NAO_INFORMADO;
+            return this.nome;
+        }
+        if (!nome.matches("^[A-Za-zÀ-ÿ\\s]+$")) {
             throw new IllegalArgumentException("Nome inválido, tente novamente.");
         }
-        if (nome == null) {
-            this.nome = "NAO_INFORMADO";
-            return nome;
-        }
         this.nome = nome.trim();
-        return nome;
+        return this.nome;
     }
 
-    public Float setPesoAproximado(Float pesoAproximado) {
-        if (pesoAproximado > 60 || pesoAproximado < 0.5) {
+    public String setPesoAproximado(String pesoAproximado) {
+        if (pesoAproximado == null || pesoAproximado.isEmpty() || pesoAproximado.contains(" ")) {
+            this.pesoAproximado = NAO_INFORMADO;
+            return pesoAproximado;
+        }
+        float pesoFloat = Float.parseFloat(pesoAproximado);
+        if (pesoFloat > 60 || pesoFloat < 0.5) {
             throw new IllegalArgumentException("Peso invalido tente novamente.");
         }
-        if (pesoAproximado == null || pesoAproximado.equals(" ")) {
-            this.pesoAproximado = NAO_INFORMADO;
-        }
+        this.pesoAproximado = pesoAproximado;
         return pesoAproximado;
     }
 
-    public String setIdade(String idade) {
-        if (Integer.parseInt(idade) > 20 || Integer.parseInt(idade) < 0) {
-            throw new IllegalArgumentException("idade invalda. Tente novamnte.");
-        }
-        if (Integer.parseInt(idade) < 1) {
-            this.idade = "0." + idade;
-        }
-        if (idade == null) {
+    public void setIdade(String idade) {
+        if (idade == null || idade.trim().isEmpty() || idade.contains(" ")) {
             this.idade = NAO_INFORMADO;
+            return;
         }
-        if (idade.matches("^[a-zA-ZÃ-ÿ]")) {
-            throw new IllegalArgumentException("A idade do pet so pode ser definida por números.");
+        try{
+        int idadeInt = Integer.parseInt(idade);
+
+        if (idadeInt > 20 || idadeInt < 0) {
+            throw new IllegalArgumentException("idade invalida. Tente novamente.");
         }
-        return idade;
+        }catch (NumberFormatException e){
+            this.idade = NAO_INFORMADO;
+            return;
+        }
+
+        this.idade = idade;
     }
 
     public void setEnderecoPet(EnderecoPet enderecoPet) {
@@ -87,20 +102,64 @@ public class Pet {
 
     public void setTipoPet(TipoPet tipoPet) {
         this.tipoPet = tipoPet;
+    }
+
+    public void setPetGender(PetGender petGender) {
+        this.petGender = petGender;
+    }
+
+    public String setPetRace(String petRace) {
+        if (petRace == null || petRace.isEmpty() || petRace.contains(" ")) {
+            this.petRace = NAO_INFORMADO;
+            return this.petRace;
+        }
+        this.petRace = petRace;
+        return petRace;
+    }
+
+    public void criarArquivo() {
+        Path path = Paths.get("C:\\Users\\CAUA\\IdeaProjects\\desafioCadastro\\src\\petsCadastrados");
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
+        String format = dtf.format(localDateTime);
+        String nomeArquivo = format + "-" + (getNome() != null ? getNome().toUpperCase() : setNome(NAO_INFORMADO.replace(" ", "").toUpperCase().trim())) + ".txt";
 
 
-        public void setPetGender (PetGender petGender){
-            this.petGender = petGender;
+        File pastaCadastro = new File(String.valueOf(path.toAbsolutePath()));
+        File pastaPrincipal = new File(pastaCadastro, nomeArquivo);
+        if (!pastaCadastro.exists()) {
+            if (pastaCadastro.mkdir()) {
+                System.out.println("O diretorio foi criado.");
+            } else {
+                System.out.println("O diretorio não foi criado.");
+            }
         }
 
-        public void setPetRace (String petRace){
-            if (petRace == null) {
-                this.petRace = NAO_INFORMADO;
-            }
-            if (!petRace.matches("^[a-zA-ZÃ-ÿ]")) {
-                throw new IllegalArgumentException("A raça do pet nao pode conter numeros, espaços ou caracteres especiais.");
-            }
-            this.petRace = petRace;
+
+        try (
+                FileWriter fw = new FileWriter(pastaPrincipal)) {
+            BufferedWriter bf = new BufferedWriter(fw);
+            bf.write("1 - " + getNome());
+            bf.newLine();
+            bf.write("2 - " + getTipoPet());
+            bf.newLine();
+            bf.write("3 - " + getPetGender());
+            bf.newLine();
+            bf.write("4 - " + getEnderecoPet().getRuaEncontrada() + ", " + getEnderecoPet().getNumeroDaCasa() + ", " + getEnderecoPet().getCidadeEncontrada() + ".");
+            bf.newLine();
+            bf.write("5 - " + getIdade());
+            bf.newLine();
+            bf.write("6 - " + getPesoAproximado());
+            bf.newLine();
+            bf.write("7 - " + getPetRace());
+            bf.flush();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
         }
     }
+
+
+}
 

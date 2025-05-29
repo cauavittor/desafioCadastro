@@ -2,7 +2,14 @@ package main;
 
 import menu.FileMenu;
 import menu.Menu;
+import model.EnderecoPet;
+import model.Pet;
+import model.PetGender;
+import model.TipoPet;
+import services.CadastrarPet;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -10,10 +17,15 @@ import menu.Menu;
 public class Main {
     public static void main(String[] args) {
     Menu menu = new Menu();
-        menu.opcoesMenu();
+
         FileMenu fileMenu = new FileMenu();
-        fileMenu.escreverArquivo();
-        fileMenu.lerArquivo();
+
+
+        Pet pet = new Pet();
+        EnderecoPet enderecoPet = new EnderecoPet();
+        CadastrarPet cd = new CadastrarPet();
+        cd.CadastroDePets();
+
 
 
     }

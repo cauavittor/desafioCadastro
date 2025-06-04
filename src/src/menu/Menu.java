@@ -2,11 +2,13 @@ package menu;
 
 import services.CadastrarPet;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
+    FileMenu fileMenu;
     public void opcoesMenu() throws IllegalArgumentException {
-        Scanner scanner = new Scanner (System.in);
+        Scanner scanner = new Scanner(System.in);
         CadastrarPet cadastrarPet = new CadastrarPet();
         System.out.println("\n1 - Cadastrar um novo pet");
         System.out.println("2 - Alterar os dados do pet cadastrado");
@@ -21,10 +23,11 @@ public class Menu {
             switch (opcao) {
                 case 1:
                     System.out.println("opcao 1 - cadastrar pet");
-                    cadastrarPet.CadastroDePets();
+                    cadastrarPet.CadastroDePets(scanner);
                     break;
                 case 2:
                     System.out.println("opcao 2");
+
                     break;
                 case 3:
                     System.out.println("opcao 3");
@@ -47,9 +50,6 @@ public class Menu {
             throw new RuntimeException(e.getMessage());
 
         }
+
     }
-
-
-
-
 }

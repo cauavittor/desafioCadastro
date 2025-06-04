@@ -1,0 +1,7 @@
+1 - Não informado
+2 - Cachorro
+3 - Macho
+4 - s, Não informado, s.
+5 - Não informado ano(s)
+6 - Não informadokg
+7 - Não informado

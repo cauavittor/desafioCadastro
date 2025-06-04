@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Pet {
     private String nome;
@@ -18,6 +19,7 @@ public class Pet {
     private EnderecoPet enderecoPet;
     private TipoPet tipoPet;
     private PetGender petGender;
+    private Scanner scanner;
     private static final String NAO_INFORMADO = "Não informado";
 
 
@@ -50,7 +52,7 @@ public class Pet {
     }
 
     public String setNome(String nome) {
-        if (nome == null || nome.isEmpty() || nome.contains(" ")) {
+        if (nome == null || nome.trim().isEmpty()) {
             this.nome = NAO_INFORMADO;
             return this.nome;
         }
@@ -75,33 +77,20 @@ public class Pet {
     }
 
     public void setIdade(String idade) {
-        if (idade == null || idade.trim().isEmpty() || idade.contains(" ")) {
-            this.idade = NAO_INFORMADO;
-            return;
-        }
-        try{
-        int idadeInt = Integer.parseInt(idade);
-
-        if (idadeInt > 20 || idadeInt < 0) {
-            throw new IllegalArgumentException("idade invalida. Tente novamente.");
-        }
-        }catch (NumberFormatException e){
-            this.idade = NAO_INFORMADO;
-            return;
-        }
-
         this.idade = idade;
     }
 
     public void setEnderecoPet(EnderecoPet enderecoPet) {
         if (enderecoPet.getNumeroDaCasa() == null) {
             enderecoPet.setNumeroDaCasa(NAO_INFORMADO);
+
         }
         this.enderecoPet = enderecoPet;
     }
 
     public void setTipoPet(TipoPet tipoPet) {
         this.tipoPet = tipoPet;
+
     }
 
     public void setPetGender(PetGender petGender) {
@@ -109,7 +98,7 @@ public class Pet {
     }
 
     public String setPetRace(String petRace) {
-        if (petRace == null || petRace.isEmpty() || petRace.contains(" ")) {
+        if (petRace == null || petRace.isEmpty()) {
             this.petRace = NAO_INFORMADO;
             return this.petRace;
         }
@@ -117,13 +106,42 @@ public class Pet {
         return petRace;
     }
 
+    public void escolhaTipoPet(int numero) {
+        String tipoPetNome;
+        if (numero == 1) {
+            this.tipoPet = TipoPet.CACHORRO;
+            tipoPetNome = tipoPet.getNome();
+            return;
+        }
+        if (numero == 2) {
+            this.tipoPet = TipoPet.GATO;
+            tipoPetNome = tipoPet.getNome();
+            return;
+        }
+    }
+
+    public void escolhaGenero(int escolha) {
+        if (escolha == 1) {
+            this.petGender = PetGender.MACHO;
+            String genero = petGender.getDescricao();
+        }
+        if (escolha == 2) {
+            this.petGender = PetGender.FEMEA;
+            String genero = this.petGender.getDescricao();
+        }
+        if (escolha < 1 || escolha > 2) {
+            System.out.println("Valor invalido. Tente novamente.");
+        }
+    }
+
+
     public void criarArquivo() {
         Path path = Paths.get("C:\\Users\\CAUA\\IdeaProjects\\desafioCadastro\\src\\petsCadastrados");
 
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
         String format = dtf.format(localDateTime);
-        String nomeArquivo = format + "-" + (getNome() != null ? getNome().toUpperCase() : setNome(NAO_INFORMADO.replace(" ", "").toUpperCase().trim())) + ".txt";
+        String nomeArquivo = format + "-" + getNome().replace(" ", "").toUpperCase().trim() + ".txt";
 
 
         File pastaCadastro = new File(String.valueOf(path.toAbsolutePath()));
@@ -148,9 +166,9 @@ public class Pet {
             bf.newLine();
             bf.write("4 - " + getEnderecoPet().getRuaEncontrada() + ", " + getEnderecoPet().getNumeroDaCasa() + ", " + getEnderecoPet().getCidadeEncontrada() + ".");
             bf.newLine();
-            bf.write("5 - " + getIdade());
+            bf.write("5 - " + getIdade() + " ano(s)");
             bf.newLine();
-            bf.write("6 - " + getPesoAproximado());
+            bf.write("6 - " + getPesoAproximado() + "kg");
             bf.newLine();
             bf.write("7 - " + getPetRace());
             bf.flush();

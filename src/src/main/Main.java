@@ -10,22 +10,24 @@ import services.CadastrarPet;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-    Menu menu = new Menu();
+        Menu menu = new Menu();
 
         FileMenu fileMenu = new FileMenu();
 
-
+        Scanner scanner = new Scanner(System.in);
         Pet pet = new Pet();
         EnderecoPet enderecoPet = new EnderecoPet();
         CadastrarPet cd = new CadastrarPet();
-        cd.CadastroDePets();
 
+        fileMenu.escreverArquivo();
+        menu.opcoesMenu();
 
 
     }

@@ -12,9 +12,10 @@ public class EnderecoPet {
         return numeroDaCasa;
     }
 
-    public void setNumeroDaCasa(String numeroDaCasa) {
+    public String setNumeroDaCasa(String numeroDaCasa) {
 
         this.numeroDaCasa = numeroDaCasa;
+        return this.numeroDaCasa;
     }
 
     public String getCidadeEncontrada() {
@@ -29,8 +30,9 @@ public class EnderecoPet {
         return ruaEncontrada;
     }
 
-    public void setRuaEncontrada(String ruaEncontrada) {
+    public String setRuaEncontrada(String ruaEncontrada) {
         this.ruaEncontrada = ruaEncontrada;
+        return ruaEncontrada;
     }
 
 }

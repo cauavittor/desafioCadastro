@@ -1,47 +1,67 @@
 package services;
 
+import menu.FileMenu;
+import menu.Menu;
 import model.EnderecoPet;
 import model.Pet;
 import model.PetGender;
 import model.TipoPet;
+import utils.Funcionalidades;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class CadastrarPet {
     private Pet pet = new Pet();
     private EnderecoPet enderecoPet = new EnderecoPet();
+    private TipoPet tipoPet;
+    private FileMenu fileMenu = new FileMenu();
+    Funcionalidades funcionalidades = new Funcionalidades();
 
-    public void CadastroDePets(){
+    public void CadastroDePets(Scanner scanner){
 
-        LocalDateTime localDateTime = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMDD'T'HH:mm");
-        String format = dtf.format(localDateTime);
+        fileMenu.leitorDeLinhas(1);
+        scanner.nextLine();
+        pet.setNome(scanner.nextLine());
 
-        pet.setNome("Filisteu");
+        fileMenu.leitorDeLinhas(2);
+        System.out.println("1 = Cachorro 2 = Gato");
+        pet.escolhaTipoPet(funcionalidades.lerNvalido(scanner));
+
+        fileMenu.leitorDeLinhas(3);
+        System.out.println("1 = Macho 2 = Femea");
+        pet.escolhaGenero(funcionalidades.lerNvalido(scanner));
+
+
+        fileMenu.leitorDeLinhas(4);
+        scanner.nextLine();
+        System.out.println("Rua: ");
+        enderecoPet.setRuaEncontrada(funcionalidades.ruaInvlaida(scanner));
+
+        System.out.println("Cidade onde o pet foi encontrado: ");
+        enderecoPet.setCidadeEncontrada(funcionalidades.cidadeValida(scanner));
+
+        System.out.println("numero da casa: ");
+        enderecoPet.setNumeroDaCasa(funcionalidades.validarNumeroCasa(scanner));
+
         pet.setEnderecoPet(enderecoPet);
-        pet.setTipoPet(TipoPet.GATO);
-        pet.setPetGender(PetGender.FEMEA);
-        enderecoPet.setRuaEncontrada("Corbiniano Freire");
-        enderecoPet.setNumeroDaCasa("171");
-        enderecoPet.setCidadeEncontrada("Itabuna");
-        pet.setIdade("4");
-        pet.setPesoAproximado("48");
-        pet.setPetRace("siames");
+
+        fileMenu.leitorDeLinhas(5);
+        pet.setIdade(funcionalidades.idadeValida(scanner));
+
+        fileMenu.leitorDeLinhas(6);
+        pet.setPesoAproximado(scanner.nextLine());
+
+        fileMenu.leitorDeLinhas(7);
+        pet.setPetRace(scanner.nextLine());
+
+        System.out.println("Cadastrando pet...");
+        System.out.println("Pet cadastrado.");
         pet.criarArquivo();
-
-        Pet pet1 = new Pet();
-        EnderecoPet enderecoPet1 = new EnderecoPet();
-
-
-        pet1.setEnderecoPet(enderecoPet1);
-        enderecoPet1.setCidadeEncontrada("Itabuna");
-        enderecoPet1.setRuaEncontrada("Corbiniano");
-        pet1.criarArquivo();
-
     }
 
 

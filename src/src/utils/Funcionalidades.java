@@ -66,5 +66,28 @@ public class Funcionalidades {
         }
         return idade;
     }
+
+    public String pesoValido(Scanner scanner){
+        String peso = scanner.nextLine();
+        Float pesoFloat = Float.parseFloat(peso);
+        if (pesoFloat < 0.5 || pesoFloat > 60){
+            System.out.println("Peso inválido.");
+            System.out.println("O peso do pet não pode ser definido por numeros negativos ou maiores que 60 kg");
+            return pesoValido(scanner);
+        }
+        String peso1 = String.valueOf(pesoFloat);
+        return peso1;
+    }
+
+    public String racaValida(Scanner scanner){
+        String race = scanner.nextLine();
+        if (race.matches(".*\\d.*") || race.contains(" ") || race.trim().isEmpty()){
+            System.out.println("A raça do pet não pode conter numeros ou espaços.");
+            System.out.println("Digte novamente.");
+            return racaValida(scanner);
+        }
+        return race;
+    }
+
 }
 

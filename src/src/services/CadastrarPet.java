@@ -54,10 +54,10 @@ public class CadastrarPet {
         pet.setIdade(funcionalidades.idadeValida(scanner));
 
         fileMenu.leitorDeLinhas(6);
-        pet.setPesoAproximado(scanner.nextLine());
+        pet.setPesoAproximado(funcionalidades.pesoValido(scanner));
 
         fileMenu.leitorDeLinhas(7);
-        pet.setPetRace(scanner.nextLine());
+        pet.setPetRace(funcionalidades.racaValida(scanner));
 
         System.out.println("Cadastrando pet...");
         System.out.println("Pet cadastrado.");

@@ -22,24 +22,24 @@ public class Menu {
         try {
             switch (opcao) {
                 case 1:
-                    System.out.println("opcao 1 - cadastrar pet");
+                    System.out.println("opcão 1 - CADASTRAR PET");
                     cadastrarPet.CadastroDePets(scanner);
                     break;
                 case 2:
-                    System.out.println("opcao 2");
+                    System.out.println("opcão 2");
 
                     break;
                 case 3:
-                    System.out.println("opcao 3");
+                    System.out.println("opcão 3");
                     break;
                 case 4:
-                    System.out.println("opcao 4");
+                    System.out.println("opcão 4");
                     break;
                 case 5:
-                    System.out.println("opcao 5");
+                    System.out.println("opcão 5");
                     break;
                 case 6:
-                    System.out.println("opcao 6");
+                    System.out.println("opcão 6");
                     break;
             }
             if (opcao < 1 || opcao > 6) {

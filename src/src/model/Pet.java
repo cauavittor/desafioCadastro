@@ -1,6 +1,8 @@
 package model;
 
 
+import services.ListarPet;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -137,6 +139,7 @@ public class Pet {
 
     public void criarArquivo() {
         Path path = Paths.get("C:\\Users\\CAUA\\IdeaProjects\\desafioCadastro\\src\\petsCadastrados");
+        ListarPet listarPet = new ListarPet();
 
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
@@ -176,6 +179,9 @@ public class Pet {
                 IOException e) {
             throw new RuntimeException(e);
         }
+        listarPet.adicionarPet();
+
+
     }
 
 

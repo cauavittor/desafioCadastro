@@ -45,10 +45,7 @@ public class Funcionalidades {
             numeroCasa = NAO_INFORMADO;
             return numeroCasa;
         }
-        if (!numeroCasa.matches("^[0-9]$")) {
-            numeroCasa = NAO_INFORMADO;
-            return numeroCasa;
-        }
+
 
         return numeroCasa;
     }
@@ -67,10 +64,10 @@ public class Funcionalidades {
         return idade;
     }
 
-    public String pesoValido(Scanner scanner){
+    public String pesoValido(Scanner scanner) {
         String peso = scanner.nextLine();
         Float pesoFloat = Float.parseFloat(peso);
-        if (pesoFloat < 0.5 || pesoFloat > 60){
+        if (pesoFloat < 0.5 || pesoFloat > 60) {
             System.out.println("Peso inválido.");
             System.out.println("O peso do pet não pode ser definido por numeros negativos ou maiores que 60 kg");
             return pesoValido(scanner);
@@ -79,9 +76,9 @@ public class Funcionalidades {
         return peso1;
     }
 
-    public String racaValida(Scanner scanner){
+    public String racaValida(Scanner scanner) {
         String race = scanner.nextLine();
-        if (race.matches(".*\\d.*") || race.contains(" ") || race.trim().isEmpty()){
+        if (race.matches(".*\\d.*") || race.contains(" ") || race.trim().isEmpty()) {
             System.out.println("A raça do pet não pode conter numeros ou espaços.");
             System.out.println("Digte novamente.");
             return racaValida(scanner);
@@ -89,5 +86,17 @@ public class Funcionalidades {
         return race;
     }
 
+    public String lerRespostaValida(Scanner scanner) {
+        String resposta = scanner.next().toLowerCase();
+
+        if (resposta.equals("sim") || resposta.equals("nao") || resposta.equals("não")) {
+        return resposta;
+    }
+        else {
+            System.out.println("Respota inválida. Digite novamente 'sim' ou 'nao' para validar a sua resposta.");
+            return lerRespostaValida(scanner);
+        }
+    }
 }
+
 

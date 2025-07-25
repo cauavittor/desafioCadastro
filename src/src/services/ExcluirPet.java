@@ -32,10 +32,10 @@ public class ExcluirPet {
         String resposta = funcionalidades.lerRespostaValida(scanner);
 
         if (!resposta.equals("sim")){
-            excluirPet();
+            System.out.println("Exclusão cancelada.");
             return;
         }
-        if (escolha < 1 || escolha < pets.size()){
+        if (escolha < 1 || escolha > pets.size()){
             System.out.println("Número inválido. Digite novamente.");
             excluirPet();
             return;
@@ -43,7 +43,7 @@ public class ExcluirPet {
         }
 
         for (File arquivo : files){
-            if (arquivo.getName().contains(" - " + nome + ".TXT")){
+            if (arquivo.getName().toUpperCase().endsWith("5-" + nome + ".TXT")){
                 if (arquivo.delete()){
                     System.out.println("Pet deletado com sucesso.");
                 } else {

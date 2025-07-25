@@ -78,9 +78,10 @@ public class ListarPet {
 
 
     public void menuBusca(Scanner scanner) {
-        ArrayList<Pet> listaDePets = adicionarPet();
+        ArrayList<Pet> listaDePets;
 
-        List<Pet> listaFiltrada = null;
+        List<Pet> listaFiltrada;
+        listaDePets = adicionarPet();
         System.out.println("Escolha quantos criterios você deseja para buscar o pet cadastrado.");
 
         menuPetCadastrado();
@@ -93,7 +94,7 @@ public class ListarPet {
             System.out.println("As opções escolhidas não podem ser iguais.");
             menuPetCadastrado();
         }
-
+        System.out.println(" ");
         System.out.println("Escolha o tipo do pet: ");
         System.out.println("1 - Cachorro | 2 - Gato");
         int escolhaTipoPet = funcionalidades.lerNvalido(scanner);
@@ -109,19 +110,19 @@ public class ListarPet {
 
         TipoPet finalTipoPet = tipoPet;
         listaFiltrada = listaDePets.stream().filter(pet -> pet.getTipoPet() == finalTipoPet).toList();
-
+        scanner.nextLine();
         if (op1 == 1 || op2 == 1) {
             //filtrar por nome
             System.out.print("Digite o nome e sobrenome do pet: ");
             String nomeEscolhido = scanner.nextLine().toLowerCase();
 
-            while (nomeEscolhido.isBlank()) {
+            if (nomeEscolhido.isBlank()) {
                 System.out.println("Nome inválido. Tente novamente.");
-
+            }
                 if (!nomeEscolhido.isBlank()) {
                     listaFiltrada = filtrarPorNome(nomeEscolhido, listaFiltrada);
                 }
-            }
+
 
 
         }

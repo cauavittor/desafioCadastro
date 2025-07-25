@@ -56,29 +56,52 @@ public class Funcionalidades {
             idade = NAO_INFORMADO;
             return idade;
         }
-        int idadeInt = Integer.parseInt(idade);
-        if (idadeInt < 0 || idadeInt > 20) {
-            System.out.println("Idade inválida. O pet não pode ter idade negativa ou maior que 20");
+        
+        try {
+            int idadeInt = Integer.parseInt(idade);
+            if (idadeInt < 0 || idadeInt > 20) {
+                System.out.println("Idade inválida. O pet não pode ter idade negativa ou maior que 20");
+                return idadeValida(scanner);
+            }
+            return idade;
+        } catch (NumberFormatException e) {
+            System.out.println("Idade inválida. Digite um número válido.");
             return idadeValida(scanner);
         }
-        return idade;
     }
 
     public String pesoValido(Scanner scanner) {
         String peso = scanner.nextLine();
-        Float pesoFloat = Float.parseFloat(peso);
-        if (pesoFloat < 0.5 || pesoFloat > 60) {
-            System.out.println("Peso inválido.");
-            System.out.println("O peso do pet não pode ser definido por numeros negativos ou maiores que 60 kg");
+        
+        // Se a string estiver vazia (usuário pressionou Enter), retorna string vazia
+        if (peso.trim().isEmpty()) {
+            return peso;
+        }
+        
+        try {
+            Float pesoFloat = Float.parseFloat(peso);
+            if (pesoFloat < 0.5 || pesoFloat > 60) {
+                System.out.println("Peso inválido.");
+                System.out.println("O peso do pet não pode ser definido por numeros negativos ou maiores que 60 kg");
+                return pesoValido(scanner);
+            }
+            String peso1 = String.valueOf(pesoFloat);
+            return peso1;
+        } catch (NumberFormatException e) {
+            System.out.println("Peso inválido. Digite um número válido.");
             return pesoValido(scanner);
         }
-        String peso1 = String.valueOf(pesoFloat);
-        return peso1;
     }
 
     public String racaValida(Scanner scanner) {
         String race = scanner.nextLine();
-        if (race.matches(".*\\d.*") || race.contains(" ") || race.trim().isEmpty()) {
+        
+        // Se a string estiver vazia (usuário pressionou Enter), retorna string vazia
+        if (race.trim().isEmpty()) {
+            return race;
+        }
+        
+        if (race.matches(".*\\d.*") || race.contains(" ")) {
             System.out.println("A raça do pet não pode conter numeros ou espaços.");
             System.out.println("Digte novamente.");
             return racaValida(scanner);

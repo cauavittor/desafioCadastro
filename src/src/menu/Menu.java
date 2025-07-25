@@ -34,6 +34,7 @@ public class Menu {
                     System.out.println("opcão 1 - CADASTRAR PET");
                     cadastrarPet.CadastroDePets(scanner);
                     System.out.println("Você deseja realizar mais alguma alteração?");
+                    System.out.println("Digite 'sim' ou 'não'");
                     String conf = funcionalidades.lerRespostaValida(scanner);
                     if (conf.equals("sim")){
                         opcoesMenu();
@@ -44,6 +45,7 @@ public class Menu {
                     System.out.println("opcão 2");
                     editarPet.editarPet();
                     System.out.println("Você deseja realizar mais alguma alteração?");
+                    System.out.println("Digite 'sim' ou 'não'");
                     String conf1 = funcionalidades.lerRespostaValida(scanner);
                     if (conf1.equals("sim")){
                         opcoesMenu();
@@ -54,6 +56,7 @@ public class Menu {
                     System.out.println("opcão 3");
                     excluirPet.excluirPet();
                     System.out.println("Você deseja realizar mais alguma alteração?");
+                    System.out.println("Digite 'sim' ou 'não'");
                     String conf2 = funcionalidades.lerRespostaValida(scanner);
                     if (conf2.equals("sim")){
                         opcoesMenu();
@@ -64,6 +67,7 @@ public class Menu {
                     System.out.println("opcão 4");
                     listarPet.listarTodosOsPets();
                     System.out.println("Você deseja realizar mais alguma alteração?");
+                    System.out.println("Digite 'sim' ou 'não'");
                     String conf3 = funcionalidades.lerRespostaValida(scanner);
                     if (conf3.equals("sim")){
                         opcoesMenu();
@@ -74,6 +78,7 @@ public class Menu {
                     System.out.println("opcão 5");
                     listarPet.menuBusca(scanner);
                     System.out.println("Você deseja realizar mais alguma alteração?");
+                    System.out.println("Digite 'sim' ou 'não'");
                     String conf4 = funcionalidades.lerRespostaValida(scanner);
                     if (conf4.equals("sim")){
                         opcoesMenu();
